@@ -1,0 +1,205 @@
+{
+  "pricing_model": {
+    "standard": {
+      "name": "Community Standard",
+      "cpm_cost": 5.00,
+      "description": "Best for neighbourhood awareness (Feed & Banner).",
+      "min_budget": 50.00
+    },
+    "premium": {
+      "name": "Prime Visibility",
+      "cpm_cost": 12.00,
+      "description": "Top-of-page placement, Verified Badge, and Analytics.",
+      "min_budget": 150.00
+    },
+    "enterprise": {
+      "name": "National Reach",
+      "cpm_cost": 18.50,
+      "description": "Cross-city targeting for franchises.",
+      "min_budget": 1000.00
+    }
+  },
+  "vendor_inventory": [
+    {
+      "id": 101,
+      "name": "Maple Leaf Plumbing",
+      "location": "Toronto, ON",
+      "category": "Home Services",
+      "rating": 4.8,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 102,
+      "name": "Downtown Sourdough",
+      "location": "Toronto, ON",
+      "category": "Food & Drink",
+      "rating": 4.9,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 103,
+      "name": "QuickFix Tutors",
+      "location": "Vancouver, BC",
+      "category": "Education",
+      "rating": 4.2,
+      "verified": false,
+      "status": "Pending"
+    },
+    {
+      "id": 104,
+      "name": "Lens & Light Photography",
+      "location": "Montreal, QC",
+      "category": "Creative Services",
+      "rating": 4.7,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 105,
+      "name": "GreenThumb Landscaping",
+      "location": "Calgary, AB",
+      "category": "Home Services",
+      "rating": 4.5,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 106,
+      "name": "ByteBack Data Recovery",
+      "location": "Toronto, ON",
+      "category": "Tech Support",
+      "rating": 3.9,
+      "verified": false,
+      "status": "Pending"
+    },
+    {
+      "id": 107,
+      "name": "Yoga on Yonge",
+      "location": "Toronto, ON",
+      "category": "Health & Wellness",
+      "rating": 5.0,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 108,
+      "name": "The Dog Walker Bros",
+      "location": "Vancouver, BC",
+      "category": "Pets",
+      "rating": 4.8,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 109,
+      "name": "Prestige Auto Detailing",
+      "location": "Mississauga, ON",
+      "category": "Automotive",
+      "rating": 4.6,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 110,
+      "name": "Halifax Event Planners",
+      "location": "Halifax, NS",
+      "category": "Events",
+      "rating": 4.9,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 111,
+      "name": "Pure Vegan Bistro",
+      "location": "Vancouver, BC",
+      "category": "Food & Drink",
+      "rating": 4.7,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 112,
+      "name": "Rocky Mountain Roofers",
+      "location": "Calgary, AB",
+      "category": "Home Services",
+      "rating": 4.3,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 113,
+      "name": "CodeKids Academy",
+      "location": "Remote",
+      "category": "Education",
+      "rating": 4.9,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 114,
+      "name": "Mobile Mechanic 24/7",
+      "location": "Toronto, ON",
+      "category": "Automotive",
+      "rating": 4.1,
+      "verified": false,
+      "status": "Active"
+    },
+    {
+      "id": 115,
+      "name": "Glow Up Skincare",
+      "location": "Montreal, QC",
+      "category": "Health & Wellness",
+      "rating": 4.8,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 116,
+      "name": "Paws & Claws Grooming",
+      "location": "Ottawa, ON",
+      "category": "Pets",
+      "rating": 4.5,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 117,
+      "name": "Urban Design Architects",
+      "location": "Toronto, ON",
+      "category": "Creative Services",
+      "rating": 5.0,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 118,
+      "name": "QuickCuts Barber",
+      "location": "Winnipeg, MB",
+      "category": "Health & Wellness",
+      "rating": 4.4,
+      "verified": false,
+      "status": "Active"
+    },
+    {
+      "id": 119,
+      "name": "Elite Math Tutoring",
+      "location": "Waterloo, ON",
+      "category": "Education",
+      "rating": 4.9,
+      "verified": true,
+      "status": "Active"
+    },
+    {
+      "id": 120,
+      "name": "Happy Tails Hotel",
+      "location": "Calgary, AB",
+      "category": "Pets",
+      "rating": 4.7,
+      "verified": true,
+      "status": "Active"
+    }
+  ],
+  "lead_capture_fields": ["business_name", "email", "budget_range", "campaign_goal"]
+}
