@@ -8,10 +8,9 @@ import string
 # --- CONFIGURATION ---
 st.set_page_config(page_title="Moosebot Prototype", page_icon="🫎", layout="centered")
 
-# --- 🎨 FINAL "FORCE FIX" THEME ---
+# --- 🎨 FINAL WHATSAPP STYLE THEME (FORCE ALIGNMENT) ---
 MOOSE_THEME = """
 <style>
-    /* Import Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
 
     :root {
@@ -21,75 +20,42 @@ MOOSE_THEME = """
         --border: #E5E7EB;
     }
 
-    /* Main Background */
-    .stApp {
-        background-color: var(--bg-light);
-        font-family: 'Inter', sans-serif;
-    }
+    .stApp { background-color: var(--bg-light); font-family: 'Inter', sans-serif; }
+    h1 { font-family: 'Playfair Display', serif !important; color: var(--text-dark) !important; font-weight: 800 !important; }
 
-    /* Header */
-    h1 {
-        font-family: 'Playfair Display', serif !important;
-        color: var(--text-dark) !important;
-    }
-
-    /* =========================================
-       CHAT MESSAGE LAYOUT ENGINE
-       ========================================= */
-
-    /* 1. USER MESSAGE (RIGHT SIDE) - Target Even Messages (2, 4, 6) */
+    /* USER MESSAGE (RIGHT) */
     div[data-testid="stChatMessage"]:nth-of-type(even) {
-        flex-direction: row-reverse; /* Flip Avatar to Right */
-        background-color: transparent;
-    }
-
-    /* The Bubble Box */
-    div[data-testid="stChatMessage"]:nth-of-type(even) div[data-testid="stMarkdownContainer"] {
-        background-color: var(--primary-teal);
-        color: white !important;
-        padding: 12px 18px;
-        border-radius: 18px 18px 0 18px; /* Sharp bottom-right corner */
-        text-align: right; 
-    }
-
-    /* The Text inside the Bubble */
-    div[data-testid="stChatMessage"]:nth-of-type(even) p {
-        color: white !important;
-    }
-
-    /* 2. BOT MESSAGE (LEFT SIDE) - Target Odd Messages (1, 3, 5) */
-    div[data-testid="stChatMessage"]:nth-of-type(odd) {
-        flex-direction: row; /* Normal Layout */
-        background-color: transparent;
-    }
-
-    /* The Bubble Box */
-    div[data-testid="stChatMessage"]:nth-of-type(odd) div[data-testid="stMarkdownContainer"] {
-        background-color: #FFFFFF;
-        border: 1px solid var(--border);
-        color: var(--text-dark);
-        padding: 12px 18px;
-        border-radius: 18px 18px 18px 0; /* Sharp bottom-left corner */
-    }
-
-    /* 3. AVATAR STYLING */
-    div[data-testid="stChatMessageAvatar"] {
+        flex-direction: row-reverse !important;
+        text-align: right !important;
         background-color: transparent !important;
-        border: none !important;
     }
-
-    /* 4. HIDE USER AVATAR ICON (Optional - Clean Look) */
-    /* Uncomment this if you want only the bubble for the user */
-    /* div[data-testid="stChatMessage"]:nth-of-type(even) div[data-testid="stChatMessageAvatar"] {
-        display: none;
-    } */
-
-    /* 5. INPUT FIELD */
-    .stChatInput input {
-        border-radius: 25px !important;
-        border: 1px solid #D1D5DB !important;
-        background-color: white !important;
+    div[data-testid="stChatMessage"]:nth-of-type(even) div[data-testid="stMarkdownContainer"] {
+        background-color: var(--primary-teal) !important;
+        color: white !important;
+        padding: 12px 18px !important;
+        border-radius: 18px 18px 0 18px !important;
+        margin-left: auto !important;
+        margin-right: 10px !important;
     }
+    div[data-testid="stChatMessage"]:nth-of-type(even) p { color: white !important; }
+
+    /* BOT MESSAGE (LEFT) */
+    div[data-testid="stChatMessage"]:nth-of-type(odd) {
+        flex-direction: row !important;
+        text-align: left !important;
+        background-color: transparent !important;
+    }
+    div[data-testid="stChatMessage"]:nth-of-type(odd) div[data-testid="stMarkdownContainer"] {
+        background-color: #FFFFFF !important;
+        border: 1px solid var(--border) !important;
+        color: var(--text-dark) !important;
+        padding: 12px 18px !important;
+        border-radius: 18px 18px 18px 0 !important;
+        margin-right: auto !important;
+        margin-left: 10px !important;
+    }
+    .stChatInput input { border-radius: 25px !important; border: 1px solid #D1D5DB !important; background-color: white !important; }
+    div[data-testid="stChatMessageAvatar"] { background-color: transparent !important; }
 </style>
 """
 st.markdown(MOOSE_THEME, unsafe_allow_html=True)
@@ -124,8 +90,7 @@ def extract_views(prompt):
     m_match = re.search(r'(\d+(?:\.\d+)?)m', clean_prompt)
     if m_match: return int(float(m_match.group(1)) * 1000000)
     numbers = re.findall(r'\d+', clean_prompt)
-    if numbers:
-        return int(max(numbers, key=int))
+    if numbers: return int(max(numbers, key=int))
     return 1000
 
 # --- HELPER: SYNONYM MAPPER ---
@@ -141,8 +106,7 @@ def expand_search_terms(prompt):
     }
     expanded_prompt = prompt
     for key, value in synonyms.items():
-        if key in prompt:
-            expanded_prompt += f" {value}"
+        if key in prompt: expanded_prompt += f" {value}"
     return expanded_prompt
 
 # --- THE LOGIC ENGINE ---
@@ -160,11 +124,16 @@ def generate_response(prompt, history):
     in_consumer_flow = "found these local vendors" in last_bot_msg or "verified vendor" in last_bot_msg or "active categories" in last_bot_msg
     in_vendor_flow = "campaign simulation" in last_bot_msg or "strategy benefit" in last_bot_msg
 
-    # 1. AFFIRMATION HANDLER
-    affirmations = ["yes", "please", "sure", "ok", "yep", "do it", "standard", "premium", "good", "deal", "go ahead", "interested", "join"]
-    if any(x == prompt for x in affirmations) or any(x in prompt for x in ["yes please", "sure thing", "sounds good"]):
+    # 1. AFFIRMATION HANDLER (FIXED FOR "STANDARD" / "PREMIUM")
+    # We now check if specific keywords are present ANYWHERE in the prompt
+    closing_keywords = ["yes", "please", "sure", "ok", "yep", "do it", "good", "deal", "go ahead", "interested", "join", "add me", "waitlist", "sign me up", "standard", "premium"]
+    
+    is_affirmation = any(x in prompt for x in closing_keywords)
+    
+    if is_affirmation:
         if in_vendor_flow:
-            plan_type = "Standard" if "standard" in prompt else "Premium" if "premium" in prompt else "Custom"
+            # Determine plan from user text, default to what they likely want
+            plan_type = "Premium" if "premium" in prompt else "Standard" if "standard" in prompt else "Custom"
             ticket_id = random.randint(10000, 99999)
             return f"""
 ✅ **Campaign Request Logged**
@@ -232,13 +201,16 @@ I have alerted the team. They will audit your creative assets and contact you wi
     if any(x in prompt for x in consumer_triggers):
         results = []
         smart_prompt = expand_search_terms(prompt)
-        ignore_words = ["find", "search", "looking", "for", "a", "an", "need", "me", "show", "where", "is", "the", "hire", "list", "verified", "local", "i", "want", "like", "do", "you", "have", "what", "all", "to", "in", "at", "place"]
+        ignore_words = ["find", "search", "looking", "for", "a", "an", "need", "me", "show", "where", "is", "the", "hire", "list", "verified", "local", "i", "want", "like", "do", "you", "have", "what", "all", "to", "in", "at", "place", "services"]
         query_words = [w for w in smart_prompt.split() if w not in ignore_words]
         for vendor in sim_data["vendor_inventory"]:
             v_data = f"{vendor['name']} {vendor['category']} {vendor['location']}".lower()
             is_match = False
             for word in query_words:
                 if len(word) > 1 and word in v_data: is_match = True
+            
+            if "plumb" in prompt and "home services" in v_data: is_match = True
+            
             if is_match:
                 verified_badge = "✅ **VERIFIED**" if vendor["verified"] else "⚠️ Unverified"
                 stars = "⭐" * int(vendor['rating'])
@@ -277,14 +249,11 @@ st.header("Moosemarche Intelligent Assistant (BETA)")
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Hello! I am MooseBot. Are you a **Vendor** or a **Consumer**?"}]
 
-# --- MESSENGER CHAT LOOP ---
 for msg in st.session_state.messages:
     if msg["role"] == "assistant":
-        # Bot Message (Left)
         with st.chat_message(msg["role"], avatar="🫎"):
             st.write(msg["content"])
     else:
-        # User Message (Right - Handled by CSS)
         with st.chat_message(msg["role"]):
             st.write(msg["content"])
 
